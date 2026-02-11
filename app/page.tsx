@@ -58,7 +58,7 @@ export default function LandingPage() {
               <div className="mt-12 grid grid-cols-3 gap-8">
                 <div>
                   <p className="text-3xl font-bold text-lab-neutral-dark">500K+</p>
-                  <p className="text-sm text-lab-neutral-gray">Active Learners</p>
+                  <p className="text-sm text-lab-neutral-gray">Total Industry size</p>
                 </div>
                 <div>
                   <p className="text-3xl font-bold text-lab-neutral-dark">100+</p>
