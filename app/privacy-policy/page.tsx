@@ -96,7 +96,7 @@ export default function PrivacyPolicyPage() {
           <p className="text-base leading-relaxed text-lab-neutral-gray">
             If you have any questions about this Privacy Policy, please contact us at:
           </p>
-          <p className="text-base font-semibold text-lab-neutral-dark">[Your Email]</p>
+          <p className="text-base font-semibold text-lab-neutral-dark">tarunpahade55@gmail.com</p>
         </section>
       </div>
     </div>
