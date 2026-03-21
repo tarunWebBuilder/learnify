@@ -1,201 +1,74 @@
-'use client'
-
-import { Search, Calendar, User, ArrowRight, MessageCircle } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
-import { Sidebar } from '@/components/sidebar'
-import { Header } from '@/components/header'
-import { mockBlogs } from '@/lib/mock-data'
 import Link from 'next/link'
-import { useState } from 'react'
+import { ArrowRight, Sparkles } from 'lucide-react'
 
-export default function BlogPage() {
-  const [selectedCategory, setSelectedCategory] = useState('All')
-  
-  const categories = ['All', 'Design', 'Development', 'Business']
-  const featuredBlogs = mockBlogs.filter(b => b.featured)
-  const regularBlogs = mockBlogs.filter(
-    b => !b.featured && (selectedCategory === 'All' || b.category === selectedCategory)
-  )
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { blogs } from '@/lib/blogs'
 
+export const metadata = {
+  title: 'Blogs | Exam Prep + AI',
+  description:
+    'Fast, CTA-first blog list for JEE, NEET, UPSC, CAT, SSC, GATE, CUET, NDA and more. Jump to a post or start a free exam.',
+}
+
+export default function BlogIndexPage() {
   return (
-    <div className="flex min-h-screen bg-slate-50">
-      <Sidebar />
-
-      <div className="ml-64 flex flex-1 flex-col">
-        <Header />
-
-        <main className="flex-1 overflow-auto">
-          <div className="space-y-8 p-8">
-            {/* Featured Blogs Hero */}
-            <div className="space-y-6">
-              <div>
-                <h1 className="text-4xl font-bold text-lab-neutral-dark">Learning Hub</h1>
-                <p className="mt-3 text-base text-lab-neutral-gray">
-                  Insights, tips, and inspiration from industry experts
-                </p>
-              </div>
-
-              <div className="flex items-center gap-3 rounded-lg border border-lab-neutral-light bg-white px-4 py-3 focus-within:border-lab-bright-blue focus-within:shadow-sm transition-all">
-                <Search className="h-5 w-5 text-lab-neutral-gray" />
-                <input
-                  type="text"
-                  placeholder="Search articles..."
-                  className="flex-1 bg-transparent outline-none text-lab-neutral-dark placeholder:text-lab-neutral-gray"
-                />
-              </div>
-            </div>
-
-            {/* Featured Posts */}
-            <div className="space-y-6">
-              <h2 className="text-2xl font-bold text-lab-neutral-dark">Featured Stories</h2>
-              <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-                {featuredBlogs.map((blog, idx) => (
-                  <Card
-                    key={blog.id}
-                    className={`overflow-hidden border border-lab-neutral-light ${blog.color} shadow-sm hover:shadow-md transition-all cursor-pointer group`}
-                  >
-                    <div className="space-y-4 p-6">
-                      <div className="relative h-40 rounded-lg bg-gradient-to-br from-white/50 to-white/20 flex items-center justify-center overflow-hidden">
-                        <span className="text-6xl opacity-50 group-hover:scale-110 transition-transform">
-                          {blog.sticker}
-                        </span>
-                      </div>
-                      
-                      <div className="space-y-3">
-                        <div className="flex items-center gap-2">
-                          <span className="inline-block rounded-full bg-lab-neutral-light px-3 py-1 text-xs font-semibold text-lab-neutral-gray">
-                            {blog.category}
-                          </span>
-                          <span className="text-xs text-lab-neutral-gray">{blog.readTime}</span>
-                        </div>
-                        
-                        <h3 className="font-semibold text-lab-neutral-dark line-clamp-2 text-balance text-lg">
-                          {blog.title}
-                        </h3>
-                        
-                        <p className="text-sm text-lab-neutral-gray line-clamp-2">
-                          {blog.excerpt}
-                        </p>
-                      </div>
-
-                      <div className="flex items-center justify-between pt-2 border-t border-slate-200/50">
-                        <div className="text-xs text-slate-600">
-                          <User className="h-3 w-3 inline mr-1" />
-                          {blog.author}
-                        </div>
-                        <ArrowRight className="h-4 w-4 text-slate-400 group-hover:translate-x-1 transition-transform" />
-                      </div>
-                    </div>
-                  </Card>
-                ))}
-              </div>
-            </div>
-
-            {/* Category Filter */}
-            <div className="flex flex-wrap gap-2">
-              {categories.map(category => (
-                <button
-                  key={category}
-                  onClick={() => setSelectedCategory(category)}
-                  className={`px-4 py-2 rounded-full font-medium transition-all ${
-                    selectedCategory === category
-                      ? 'bg-purple-300 text-slate-900 shadow-sm'
-                      : 'bg-white text-slate-700 border border-slate-200 hover:border-slate-300'
-                  }`}
-                >
-                  {category}
-                </button>
-              ))}
-            </div>
-
-            {/* Recent Articles */}
-            <div className="space-y-4">
-              <h2 className="text-2xl font-bold text-slate-900">Recent Articles</h2>
-              <div className="space-y-4">
-                {regularBlogs.map(blog => (
-                  <Card
-                    key={blog.id}
-                    className={`border-0 shadow-sm transition-all hover:shadow-md cursor-pointer group ${blog.color}`}
-                  >
-                    <div className="flex gap-6 p-6">
-                      <div className="hidden sm:flex h-24 w-24 items-center justify-center rounded-lg bg-white/50 flex-shrink-0">
-                        <span className="text-4xl">{blog.sticker}</span>
-                      </div>
-
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-start justify-between gap-4">
-                          <div className="flex-1 min-w-0">
-                            <div className="flex items-center gap-2 mb-2">
-                              <span className="inline-block rounded-full bg-slate-200 px-3 py-1 text-xs font-semibold text-slate-700">
-                                {blog.category}
-                              </span>
-                              <span className="text-xs text-slate-600">{blog.readTime}</span>
-                            </div>
-
-                            <h3 className="font-bold text-slate-900 text-lg hover:text-purple-600 transition-colors line-clamp-2 text-balance">
-                              {blog.title}
-                            </h3>
-
-                            <p className="mt-2 text-sm text-slate-600 line-clamp-2">
-                              {blog.excerpt}
-                            </p>
-
-                            <div className="mt-4 flex items-center justify-between">
-                              <div className="flex items-center gap-4 text-xs text-slate-600">
-                                <span className="flex items-center gap-1">
-                                  <Calendar className="h-3 w-3" />
-                                  {new Date(blog.date).toLocaleDateString('en-US', {
-                                    month: 'short',
-                                    day: 'numeric',
-                                    year: 'numeric',
-                                  })}
-                                </span>
-                                <span className="flex items-center gap-1">
-                                  <User className="h-3 w-3" />
-                                  {blog.author}
-                                </span>
-                              </div>
-                              <ArrowRight className="h-4 w-4 text-slate-400 group-hover:translate-x-1 transition-transform" />
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </Card>
-                ))}
-              </div>
-
-              {regularBlogs.length === 0 && (
-                <Card className="border-0 bg-white p-12 text-center shadow-sm">
-                  <p className="text-slate-600">No articles found in this category.</p>
-                </Card>
-              )}
-            </div>
-
-            {/* Newsletter CTA */}
-            <Card className="border-0 bg-gradient-to-r from-purple-200 to-blue-200 p-12 shadow-sm">
-              <div className="text-center space-y-4">
-                <h3 className="text-2xl font-bold text-slate-900">Stay Updated</h3>
-                <p className="text-slate-700 max-w-2xl mx-auto">
-                  Subscribe to our newsletter to get the latest articles, tips, and industry insights delivered to your inbox.
-                </p>
-                <div className="flex gap-2 max-w-md mx-auto">
-                  <input
-                    type="email"
-                    placeholder="your@email.com"
-                    className="flex-1 px-4 py-3 rounded-lg border border-slate-300 bg-white focus:outline-none focus:ring-2 focus:ring-purple-400"
-                  />
-                  <Button className="gap-2 bg-purple-600 hover:bg-purple-700 text-white">
-                    Subscribe
+    <main className="min-h-screen bg-[#f6f1e8] px-4 py-10 text-slate-950 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-6xl space-y-8">
+        <section className="rounded-[32px] border border-black/10 bg-white p-8 shadow-sm">
+          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+            <div className="space-y-3">
+              <p className="inline-flex items-center gap-2 rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-slate-600">
+                <Sparkles className="h-3 w-3" />
+                Blogs built for action
+              </p>
+              <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">
+                Exam prep blogs with a single CTA to start testing
+              </h1>
+              <p className="max-w-3xl text-base leading-7 text-slate-600">
+                Each post is lean, SEO-friendly, and points you straight to the free exam flow.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <Link href="/#start-exam">
+                  <Button className="rounded-full gap-2">
+                    Start free test
                     <ArrowRight className="h-4 w-4" />
                   </Button>
-                </div>
+                </Link>
               </div>
-            </Card>
+            </div>
+
+            <div className="w-full max-w-sm rounded-3xl border border-slate-200 bg-[#faf7f2] p-5">
+              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-slate-600">Sponsored</p>
+              <div className="mt-3 flex h-24 items-center justify-center rounded-2xl border border-dashed border-slate-300 bg-white text-sm font-semibold text-slate-500">
+                Banner Ad 300x100
+              </div>
+            </div>
           </div>
-        </main>
+        </section>
+
+        <section className="grid gap-4 md:grid-cols-2">
+          {blogs.map((blog) => (
+            <Link key={blog.id} href={`/blog/${blog.slug}`} className="block">
+              <Card className="h-full rounded-[28px] border-slate-200 bg-white transition hover:-translate-y-0.5 hover:shadow-md">
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-xl">{blog.title}</CardTitle>
+                  <CardDescription className="text-slate-600">
+                    {blog.exam} · {blog.subject}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <p className="text-sm leading-6 text-slate-600">{blog.description}</p>
+                  <div className="flex items-center gap-2 text-sm font-medium text-slate-900">
+                    Read and start tests
+                    <ArrowRight className="h-4 w-4" />
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
+          ))}
+        </section>
       </div>
-    </div>
+    </main>
   )
 }

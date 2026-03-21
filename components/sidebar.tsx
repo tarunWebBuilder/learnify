@@ -15,7 +15,7 @@ export function Sidebar() {
         <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-lab-bright-blue">
           <BookOpen className="h-6 w-6 text-white" />
         </div>
-        <span className="text-xl font-bold text-lab-neutral-dark">Learnify</span>
+        <span className="text-xl font-bold text-lab-neutral-dark">tutorly-ai</span>
       </div>
 
       <nav className="space-y-1">

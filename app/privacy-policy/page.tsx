@@ -8,7 +8,7 @@ export default function PrivacyPolicyPage() {
         <section className="mt-10 space-y-4">
           <h2 className="text-2xl font-semibold text-lab-neutral-dark">1. Introduction</h2>
           <p className="text-base leading-relaxed text-lab-neutral-gray">
-            Learnify (&ldquo;we,&rdquo; &ldquo;our,&rdquo; or &ldquo;us&rdquo;) values your privacy.
+            tutorly-ai (&ldquo;we,&rdquo; &ldquo;our,&rdquo; or &ldquo;us&rdquo;) values your privacy.
             This Privacy Policy explains how we collect, use, and protect your information
             when you use our app.
           </p>
